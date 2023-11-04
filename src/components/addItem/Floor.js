@@ -5,25 +5,11 @@ import { Select, Center, Box, CheckIcon, } from "native-base";
 import { useState } from 'react';
 import { NativeBaseProvider } from 'native-base';
 
-function Floor() {
-
-
-
-
-    /* return(
-       <View style={styles.container}>
-               <Text>Floor</Text>
-               <TextInput style={[tw`rounded border-solid border-4 w-80`]} />
-               <StatusBar style="auto" />
-           </View>
-     )*/
-
-
-
-    
+function Floor(props) {
 
     const [floor, setFloor] = useState("");
     return (
+        /*
         <View style={styles.container}>
              <Text>Floor</Text>
 
@@ -37,8 +23,7 @@ function Floor() {
                     placeholder="Choose Floor"  
                     style={[tw`border-4 text-center`]}
                     _selectedItem={{
-                        bg: "blue.300",
-                        //endIcon: <CheckIcon size="5" />
+                        bg: "blue.300"
                     }} mt={1} onValueChange={itemValue => setFloor(itemValue)}
                    
                     
@@ -54,6 +39,16 @@ function Floor() {
                 </Box>
             </Center>
         </NativeBaseProvider>
+        </View>*/
+        
+        <View style={styles.container}>
+
+            <Text style={[tw`mt-2 font-bold text-lg`]}>Floor</Text>
+            <TextInput style={[tw`rounded border-solid border-4 w-80 m-2 p-2 pl-5`]} 
+            onChangeText={props.handleChange('floor')}
+            value = {props.values.floor}
+            placeholder='2'/>
+            <StatusBar style="auto" />
         </View>
     )
 
@@ -70,6 +65,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        
     },
 
 });

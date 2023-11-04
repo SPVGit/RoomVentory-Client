@@ -9,7 +9,7 @@ import ItemDropdown from '../components/allItems/ItemDropdown';
 
 function AllItems() {
 
-    let [allItems, setAllItems] = useState([])
+    let [allItems, setAllItems] = useState({items:[],images:[]})
     const { height } = Dimensions.get("window");
     const [screenHeight, setScreenHeight] = useState(0);
 
@@ -23,21 +23,33 @@ function AllItems() {
 
         const url = Platform.OS === 'ios' ? IOS_URL : ANDROID_URL;
 
+        const firstLetterToCaps = (str) =>{
+            str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
         axios.get(`${url}/api/items`)
             .then((response) => {
+                console.log(response.data.itemsArray)
                 const items = response.data.itemsArray.map(item => [
-                { label: item.name, value: '1' },
-                { label: item.image, value: '2'},
-                { label: item.description, value: '3' },
-                { label: item.quantity.toString(), value: '4' },
-                { label: item.expiryDate, value: '5' },
-                { label: item.home, value: '6' },
-                { label: item.floor, value: '7' },
-                { label: item.room, value: '8' },
-                { label: item.roomSection, value: '9' },
-                { label: item.furniture, value: '10' },
-                { label: item.furnitureSection, value: '11' }])
-                setAllItems(items)
+
+                { label: `★ ${item.name}`, value: '1' },
+                { label: `     DSC:      ${item.description}`, value: '2' },
+                { label: `     QTY:       ${item.quantity.toString()}`, value: '3' },
+                { label: `     EXP:       ${item.expiryDate}`, value: '4' },
+                { label: `     HOME:   ${item.home}`, value: '5' },
+                { label: `     FLR:        ${item.floor}`, value: '6' },
+                { label: `     ROOM:   ${item.room}`, value: '7' },
+                { label: `     RMSC:    ${item.roomSection}`, value: '8' },
+                { label: `     FURN:     ${item.furniture}`, value: '9' },
+                { label: `     FNSC:    ${item.furnitureSection}`, value: '10' }
+            
+            ])
+
+                const images = response.data.itemsArray.map(item=>item.image)
+
+                const ids = response.data.itemsArray.map(item=>item.id)
+
+                setAllItems({items:items, images:images, ids:ids})
             })
             .catch(err => console.log(err))
 
@@ -56,34 +68,15 @@ function AllItems() {
             scrollEnabled={scrollEnabled}
             onContentSizeChange={onContentSizeChange}
         >
-            <Card>
+           {/* <Card >*/}
 
 
-                <View>
+                <View style={styles.container}>
+                <Text style={[tw`mt-2 text-2xl font-bold mb-6 text-center`]}>All Items</Text>
                     <ItemDropdown allItems={allItems} />
                 </View>
 
-
-
-                {  /*<Card>
-                                <Text><Text>Item: </Text>{item.name}</Text>
-                                <Text><Text>Image: </Text>{item.image}</Text>
-                                <Text><Text>Description: </Text>{item.description}</Text>
-                                <Text><Text>Quantity :</Text>{item.quantity}</Text>
-                                <Text>{item.expiryDate}</Text>
-                                <Text>{item.home}</Text>
-                                <Text>{item.floor}</Text>
-                                <Text>{item.room}</Text>
-                                <Text>{item.roomSection}</Text>
-                                <Text>{item.furniture}</Text>
-                                <Text>{item.furnitureSection}</Text>
-
-
-
-                </Card>*/}
-
-
-            </Card>
+           {/* </Card>*/}
         </ScrollView>
     )
 
@@ -96,30 +89,18 @@ const styles = StyleSheet.create({
     container: {
 
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        backgroundColor: '#0059b3',
+       // alignItems: 'center',
+       // justifyContent: 'space-between',
+        padding:'5%',
+        overflow: 'scrollY',
+        borderRadius:30
+      },
 
-        overflow: 'scrollY'
+    scrollview:{
+        paddingBottom:250,
+        
     },
+
 })
 
-/*
-
-[{"createdAt": "2023-10-28T13:27:21.675Z", "description": "Dark red", "expiryDate": "NA", "floor": "0", "furniture": "brown bookshelf", "furnitureSection": "On top", "home": "Subarna residence main", "id": 7, "image": "http://image.com/", "lastUpdatedAt": "2023-10-28T13:27:21.675Z", "name": "flower vase", "quantity": 2, "room": "sitting room", "roomSection": "front middle wall"}, 
-{"createdAt": "2023-10-28T13:27:21.351Z", "description": "red knitted", "expiryDate": "NA", "floor": "1", "furniture": "beige chest of drawers", "furnitureSection": "top left drawer", "home": "Subarna residence main", "id": 5, "image": "http://image.com/", "lastUpdatedAt": "2023-10-28T13:27:21.351Z", "name": "gloves", "quantity": 1, "room": "master bedroom", "roomSection": "right back wall"}, 
-{"createdAt": "2023-10-28T13:27:21.532Z", "description": "Nivea", "expiryDate": "30/02/2024", "floor": "1", "furniture": "white cabinet", "furnitureSection": "middle shelf", "home": "Subarna residence main", "id": 6, "image": "http://image.com/", "lastUpdatedAt": "2023-10-28T13:27:21.532Z", "name": "hand cream", "quantity": 1, "room": "bathroom", "roomSection": "front left wall"}, 
-{"createdAt": "2023-10-28T13:27:22.015Z", "description": "Giraffe print", "expiryDate": "NA", "floor": "1", "furniture": "Shelving unit", "furnitureSection": "middle shelf", "home": "Melody residence main", "id": 8, "image": "http://image.com/", "lastUpdatedAt": "2023-10-28T13:27:22.015Z", "name": "watch", "quantity": 1, "room": "box room", "roomSection": "left middle wall"}]
-
-Array.map: item => [{label: item.name, value : 1},
-{label: item.image, value : 2},
-{label: item.description, value : 3},
-{label: item.quantity, value : 4},
-{label: item.expiryDate, value : 5},
-{label: item.home, value : 6}, 
-{label: item.floor, value : 7},
-{label: item.room, value : 8},
-{label: item.roomSection, value : 9},
-{label: item.furniture, value : 10},
-{label: item.furnitureSection, value : 11}]
-*/

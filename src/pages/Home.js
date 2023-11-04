@@ -21,7 +21,9 @@ function Home({ navigation }) {
              <Text>Add New Item</Text>
             <Button
                 title="Add Item"
-                onPress={() => navigation.navigate('AddItem')}
+                onPress={() => navigation.navigate('AddItem', {
+                    userId: 'aa711089-9063-4f87-84f0-0a7ef2a44d77'
+                  })}
             />
             <Text>Search Item</Text>
             <Button

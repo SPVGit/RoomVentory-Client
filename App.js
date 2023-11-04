@@ -10,6 +10,7 @@ import LogIn from './src/pages/LogIn';
 import SearchItem from './src/pages/SearchItem';
 import AllItems from './src/pages/AllItems';
 import ItemDropdown from './src/components/allItems/ItemDropdown';
+import EditItem from './src/pages/EditItem';
 
 const Stack = createNativeStackNavigator();
  
@@ -29,8 +30,8 @@ export default function App() {
         <Stack.Screen name="LogIn" component={LogIn} />
         <Stack.Screen name="SearchItem" component={SearchItem} />
         <Stack.Screen name="AllItems" component={AllItems} />
-        <Stack.Screen name="ItemDropdown" component={ItemDropdown} />
-
+        <Stack.Screen name="EditItem" component={EditItem} />
+       
       </Stack.Navigator>
 
     </NavigationContainer>
@@ -40,3 +41,4 @@ export default function App() {
   );
 }
 
+// <Stack.Screen name="Build Home" component={BuildHome} />

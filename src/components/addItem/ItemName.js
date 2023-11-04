@@ -4,12 +4,15 @@ import tw from 'tailwind-react-native-classnames'
 
 
 
-function ItemName() {
+function ItemName(props) {
 
     return (
         <View style={styles.container}>
-            <Text >Item Name</Text>
-            <TextInput style={[tw`rounded border-solid border-4 w-80`]} />
+            <Text style={[tw`mt-2 font-bold text-lg`]}>Item Name</Text>
+            <TextInput style={[tw`rounded border-solid border-4 w-80 m-2 p-2 pl-5`]}
+            onChangeText={props.handleChange('name')}
+            value = {props.values.name}
+            placeholder='Coffee Mug'/> 
             
             <StatusBar style="auto" />
         </View>
@@ -25,6 +28,8 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
+      borderTopLeftRadius:10,
+      borderTopRightRadius:10,
     },
 
   

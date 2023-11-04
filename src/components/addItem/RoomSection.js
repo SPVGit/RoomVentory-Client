@@ -2,13 +2,16 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import tw from 'tailwind-react-native-classnames'
 
-function RoomSection() {
+function RoomSection(props) {
 
 
     return (
         <View style={styles.container}>
-            <Text>Room Section</Text>
-            <TextInput style={[tw`rounded border-solid border-4 w-80`]} />
+            <Text style={[tw`mt-2 font-bold text-lg`]}>Room Section</Text>
+            <TextInput style={[tw`rounded border-solid border-4 w-80 m-2 p-2 pl-5`]} 
+            onChangeText={props.handleChange('roomSection')}
+            value = {props.values.roomSection}
+            placeholder='Middle-right'/>
             <StatusBar style="auto" />
         </View>
     )

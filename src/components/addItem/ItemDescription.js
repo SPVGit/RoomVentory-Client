@@ -3,20 +3,23 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 import tw from 'tailwind-react-native-classnames'
 
 
-function Room(props) {
+
+function ItemDescription(props) {
+
     return (
         <View style={styles.container}>
-            <Text style={[tw`mt-2 font-bold text-lg`]}>Room</Text>
+            <Text style={[tw`mt-2 font-bold text-lg`]}>Item Description</Text>
             <TextInput style={[tw`rounded border-solid border-4 w-80 m-2 p-2 pl-5`]}
-            onChangeText={props.handleChange('room')}
-            value = {props.values.room}
-            placeholder='Kitchen'/> 
+            onChangeText={props.handleChange('description')}
+            value = {props.values.description}
+            placeholder='White, wide top narrow base'/> 
+            
             <StatusBar style="auto" />
         </View>
     )
 }
 
-export default Room;
+export default ItemDescription;
 
 
 const styles = StyleSheet.create({
@@ -26,5 +29,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+
   
   });
