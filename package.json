@@ -22,7 +22,8 @@
     "react-native-dotenv": "^3.4.9",
     "react-native-element-dropdown": "^2.10.0",
     "react-native-elements": "^3.4.3",
-    "tailwind-react-native-classnames": "^1.5.1"
+    "tailwind-react-native-classnames": "^1.5.1",
+    "react-native-svg": "13.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

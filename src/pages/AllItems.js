@@ -89,9 +89,7 @@ const styles = StyleSheet.create({
     container: {
 
         flex: 1,
-        backgroundColor: '#0059b3',
-       // alignItems: 'center',
-       // justifyContent: 'space-between',
+        backgroundColor: '#5E3B04',//Brown
         padding:'5%',
         overflow: 'scrollY',
         borderRadius:30
